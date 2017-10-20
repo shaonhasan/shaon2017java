@@ -98,6 +98,9 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void handleDigitZeroAction(ActionEvent event) {
+        if(displayField.getText().startsWith("0"))
+            if(!displayField.getText().startsWith("0."))
+                displayField.setText("");
         String oldText = displayField.getText();
         String newText = oldText + "0";
         displayField.setText(newText);
@@ -239,17 +242,79 @@ public class FXMLDocumentController implements Initializable {
     }
     @FXML
     private void handleSubButtonAction(ActionEvent event) {
+        if(!hasParsialComputation){
         String oldText = displayField.getText();
-        number1 = Integer.parseInt(oldText);
+        number1 = Double.parseDouble(oldText);
         operation = "SUBTRACT";
         displayField.clear();
+        hasParsialComputation = true;
+        }
+        else{
+            String oldText = displayField.getText();
+        number2 = Double.parseDouble(oldText);
+        double result ;
+        
+        switch (operation) {
+            case "MULLTIPLE":
+                result = number1 + number2;
+                displayField.setText("" + result);
+                break;
+            case "SUBTRACT":
+                result = number1 - number2;
+                displayField.setText("" + result);
+                break;
+            case "DIVIDE":
+                result = number1 / number2;
+                displayField.setText("" + result);
+                break;
+            case "MULTIPLE":
+                result = number1 * number2;
+                displayField.setText("" + result);
+                break;
+            default:
+                break;
+        }
+
+        hasParsialComputation = false;
+        }
     }
     @FXML
     private void handleDividedButtonAction(ActionEvent event) {
+        if(!hasParsialComputation){
         String oldText = displayField.getText();
         number1 = Double.parseDouble(oldText);
         operation = "DIVIDE";
         displayField.clear();
+        hasParsialComputation = true;
+        }
+        else{
+            String oldText = displayField.getText();
+        number2 = Double.parseDouble(oldText);
+        double result ;
+        
+        switch (operation) {
+            case "MULLTIPLE":
+                result = number1 + number2;
+                displayField.setText("" + result);
+                break;
+            case "SUBTRACT":
+                result = number1 - number2;
+                displayField.setText("" + result);
+                break;
+            case "DIVIDE":
+                result = number1 / number2;
+                displayField.setText("" + result);
+                break;
+            case "MULTIPLE":
+                result = number1 * number2;
+                displayField.setText("" + result);
+                break;
+            default:
+                break;
+        }
+
+        hasParsialComputation = false;
+        }
     }
 
     @FXML
