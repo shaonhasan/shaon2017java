@@ -3,13 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package unit.converter;
+package converter;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 /**
@@ -18,11 +19,20 @@ import javafx.scene.control.TextField;
  */
 public class FXMLDocumentController implements Initializable {
     
+    private Label label;
+    @FXML
+    private TextField meterField;
+    @FXML
+    private TextField centimeterField;
     @FXML
     private TextField inchesField;
     @FXML
-    private TextField centimetersField;
+    private TextField kilometersField;
     
+    private void handleButtonAction(ActionEvent event) {
+        System.out.println("You clicked me!");
+        label.setText("Hello World!");
+    }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -30,13 +40,18 @@ public class FXMLDocumentController implements Initializable {
     }    
 
     @FXML
-    private void handleLengthConversionAction(ActionEvent event) {
-        String inchesString = inchesField.getText();
-        double inches = Double.parseDouble(inchesString);
-        double centimeters = inches * 2.54;
-        centimetersField.setText("" + centimeters);
+    private void handleConvertAction(ActionEvent event) {
+        double meter = Double.parseDouble(meterField.getText());
+        double centimeter = meter * 100;
+        centimeterField.setText("" + centimeter);
         
     }
-    
+
+    @FXML
+    private void handleMessConvertAction(ActionEvent event) {
+        double inches = Double.parseDouble(inchesField.getText());
+        double kilometers = inches * 0.0000254;
+        kilometersField.setText("" + kilometers);
+    }
     
 }
